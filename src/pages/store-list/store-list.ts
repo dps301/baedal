@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { StoreDetailPage } from '../store-detail/store-detail';
 
-/**
- * Generated class for the StoreListPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-store-list',
@@ -19,6 +14,10 @@ export class StoreListPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad StoreListPage');
+  }
+
+  goDetail(id) {
+    this.navCtrl.push(StoreDetailPage, {id: id});
   }
 
 }
