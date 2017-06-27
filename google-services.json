@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "862078177748",
+    "firebase_url": "https://baedal-a6f11.firebaseio.com",
+    "project_id": "baedal-a6f11",
+    "storage_bucket": "baedal-a6f11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862078177748:android:705b6722ffef2080",
+        "android_client_info": {
+          "package_name": "com.birdbee301.baedal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "862078177748-pgnu53m79ko31kfmfe47g8144s3fehac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiX8hFOpuD6zxEyTI7X6g3oR3DPony3RA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
