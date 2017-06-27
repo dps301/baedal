@@ -12,6 +12,9 @@ import { LoginPage } from '../pages/login/login';
 import { TabPage } from '../pages/tab/tab';
 import { StoreListPage } from '../pages/store-list/store-list';
 import { OrderLogPage } from '../pages/order-log/order-log';
+import { OrderProvider } from '../providers/order.provider';
+import { StoreProvider } from '../providers/store.provider';
+import { UserProvider } from '../providers/user.provider';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { OrderLogPage } from '../pages/order-log/order-log';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     LoginSessionService,
     UtilService,
-    HttpService
+    HttpService,
+    OrderProvider,
+    StoreProvider,
+    UserProvider
   ]
 })
 export class AppModule {}
