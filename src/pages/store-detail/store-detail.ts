@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { StoreProvider } from '../../providers/store.provider';
 
 @IonicPage()
 @Component({
@@ -9,13 +10,33 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class StoreDetailPage {
 
   storeNo: number = 0;
+  selectedCategory: any = null;
+  categoryList: Array<any> = [];
+  menuList: Array<any> = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storeProvider: StoreProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad StoreDetailPage');
-    this.storeNo = this.navParams.get('id');
+    this.storeNo = this.navParams.get('storeNo');
+  }
+
+  getCategory() {
+    this.storeProvider.getCategory(this.storeNo)
+    .subscribe(
+      data => {
+        this.categoryList = data.json();
+      }
+    );
+  }
+
+  getMenu() {
+    this.storeProvider.getMenu(this.storeNo, this.selectedCategory)
+    .subscribe(
+      data => {
+        this.menuList = data.json();
+      }
+    );
   }
 
 }
