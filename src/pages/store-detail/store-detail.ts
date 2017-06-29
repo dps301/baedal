@@ -19,6 +19,8 @@ export class StoreDetailPage {
 
   ionViewDidLoad() {
     this.storeNo = this.navParams.get('storeNo');
+    this.getCategory();
+    this.getMenu();
   }
 
   getCategory() {
@@ -39,4 +41,8 @@ export class StoreDetailPage {
     );
   }
 
+  categoryChanged(categoryNo) {
+    this.selectedCategory = categoryNo;
+    this.getCategory();
+  }
 }

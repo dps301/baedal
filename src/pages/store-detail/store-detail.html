@@ -5,5 +5,12 @@
 </ion-header>
 
 <ion-content padding>
-
+  <ng-container *ngIf="catogoryList.length != 0">
+    <div *ngFor="let item of categoryList">
+      <span margin-horizontal (click)="categoryChanged(categoryNo)">{{item.categoryName}}</span>
+    </div>
+  </ng-container>
+  <div *ngFor="let item of menuList">
+    {{item.name}} {{item.price}}
+  </div>
 </ion-content>
