@@ -27,4 +27,16 @@ export class OrderLogPage {
     ); 
   }
 
+  cancel(orderNo) {
+    this.orderProvider.deleteOrder(orderNo)
+    .subscribe(
+      data => {
+        
+      },
+      error => {
+
+      }
+    );
+  }
+
 }

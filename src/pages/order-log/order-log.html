@@ -16,7 +16,7 @@
             {{mItem.name}} {{mItem.price * mItem.cnt | number}}
           </ion-item>
         </ion-list>
-        <button ion-button full>Cancel</button>
+        <button *ngIf="item.status == 0" ion-button full (click)="cancel(item.orderNo)">Cancel</button>
       </div>
     </ion-item>
   </ion-list>
