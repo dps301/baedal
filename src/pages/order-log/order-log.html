@@ -5,5 +5,19 @@
 </ion-header>
 
 <ion-content padding>
-  로그으으으
+  <ion-list>
+    <ion-item *ngFor="let item of logList; let idx = index" (click)="selectedIdx = idx">
+      <div class="item-title">
+        {{item.storeName}} {{item.status}}
+      </div>
+      <div class="item-expand" *ngIf="selectedIdx == idx">
+        <ion-list>
+          <ion-item *ngFor="let mItem of item.menu">
+            {{mItem.name}} {{mItem.price * mItem.cnt | number}}
+          </ion-item>
+        </ion-list>
+        <button ion-button full>Cancel</button>
+      </div>
+    </ion-item>
+  </ion-list>
 </ion-content>

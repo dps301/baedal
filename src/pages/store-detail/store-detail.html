@@ -5,12 +5,22 @@
 </ion-header>
 
 <ion-content padding>
-  <ng-container *ngIf="catogoryList.length != 0">
+  <ng-container *ngIf="categoryList.length != 0">
     <div *ngFor="let item of categoryList">
       <span margin-horizontal (click)="categoryChanged(categoryNo)">{{item.categoryName}}</span>
     </div>
   </ng-container>
-  <div *ngFor="let item of menuList">
+  <ion-item *ngFor="let item of menuList; let idx = index">
     {{item.name}} {{item.price}}
-  </div>
+    <button ion-button round (click)="editMenuCnt(idx, '+')"> + </button>
+    {{item.cnt}}
+    <button ion-button color="light" round (click)="editMenuCnt(idx, '-')" [disabled]="item.cnt == 0"> - </button>
+  </ion-item>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    Total: {{totalPrice | number}} KRW
+    <button ion-button full (click)="goOrder()">Check order</button>
+  </ion-toolbar>
+</ion-footer>

@@ -5,11 +5,11 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="store-item" *ngFor="let item of storeList" [ngClass]="{'closed': serviceStatus == 0}" (click)="goDetail(item.storeNo, item.serviceStatus)">
+  <ion-item class="store-item" *ngFor="let item of storeList" [ngClass]="{'closed': serviceStatus == 0}" (click)="goDetail(item.storeNo, item.serviceStatus)">
     {{item.storeNo}}
     {{item.storeName}}
     <img [src]="item.thumbnail" alt="">
     {{item.tel}}
     {{item.addr}}
-  </div>
+  </ion-item>
 </ion-content>

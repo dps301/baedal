@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { OrderProvider } from '../../providers/order.provider';
+import { OrderLogPage } from '../order-log/order-log';
 
-/**
- * Generated class for the OrderPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-order',
@@ -14,11 +10,36 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class OrderPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  storeNo: number = 0;
+  menu: Array<any> = [];
+  totalPrice: number = 0;
+  orderDttm: any = 0;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private orderProvider: OrderProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OrderPage');
-  }
+    this.storeNo = this.navParams.get('storeNo')
+    this.menu = this.navParams.get('menu');
+    this.totalPrice = this.navParams.get('totalPrice');
 
+    this.orderDttm = this.createDateAsUTC(new Date()).toISOString();
+  }
+  
+  createDateAsUTC(date) {
+    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()));
+  }
+  
+  order() {
+    this.orderProvider.addOrder(this.storeNo, this.orderDttm, this.menu)
+    .subscribe(
+      data => {
+        alert('ordered!');
+        this.navCtrl.setRoot(OrderLogPage);
+      },
+      error => {
+
+      }
+    )
+  }
 }

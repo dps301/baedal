@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { OrderProvider } from '../../providers/order.provider';
 
-/**
- * Generated class for the OrderLogPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-order-log',
@@ -14,11 +9,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class OrderLogPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  logList: Array<any> = [];
+  selectedIdx: number = 0;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private orderProvider: OrderProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OrderLogPage');
+    this.orderProvider.getOrder()
+    .subscribe(
+      data => {
+        this.logList = data.json();
+      },
+      error => {
+        
+      }
+    ); 
   }
 
 }

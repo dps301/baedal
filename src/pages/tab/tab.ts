@@ -17,7 +17,6 @@ export class TabPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TabPage');
   }
 
 }

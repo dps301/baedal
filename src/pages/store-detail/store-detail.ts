@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StoreProvider } from '../../providers/store.provider';
+import { OrderPage } from '../order/order';
 
 @IonicPage()
 @Component({
@@ -10,9 +11,10 @@ import { StoreProvider } from '../../providers/store.provider';
 export class StoreDetailPage {
 
   storeNo: number = 0;
-  selectedCategory: any = null;
+  selectedCategory: number = 0;
   categoryList: Array<any> = [];
   menuList: Array<any> = [];
+  totalPrice: number = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private storeProvider: StoreProvider) {
   }
@@ -44,5 +46,20 @@ export class StoreDetailPage {
   categoryChanged(categoryNo) {
     this.selectedCategory = categoryNo;
     this.getCategory();
+  }
+
+  editMenuCnt(idx, pm) {
+    if(pm == "+") {
+      this.menuList[idx].cnt++;
+      this.totalPrice += this.menuList[idx].price;
+    }
+    else if(this.menuList[idx].cnt != 0) {
+      this.menuList[idx].cnt--;
+      this.totalPrice -= this.menuList[idx].price;
+    }
+  }
+
+  goOrder() {
+    this.navCtrl.push(OrderPage, {storeNo: this.storeNo, menu: this.menuList.filter((item) => item.cnt > 0), totalPrice: this.totalPrice});
   }
 }
