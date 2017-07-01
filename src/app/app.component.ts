@@ -8,7 +8,8 @@ import { LoginPage } from '../pages/login/login';
 import { FCM } from '@ionic-native/fcm';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [ FCM ]
 })
 export class MyApp {
   rootPage:any = LoginPage;
@@ -21,15 +22,15 @@ export class MyApp {
 
     if(!platform.is('mobileweb')) {
       fcm.onNotification()
-      .subscribe(
-        (data) => {
-          if(data.wasTapped) {
-            alert(JSON.stringify(data));
-          } else{
-            alert(JSON.stringify(data));
-          }
-        }
-      );
+      .subscribe(data=>{
+        if(data.wasTapped){
+          alert("냐1");
+          console.log("Received in background");
+        } else {
+          alert("냐2");
+          console.log("Received in foreground");
+        };
+      })
     }
   }
 }

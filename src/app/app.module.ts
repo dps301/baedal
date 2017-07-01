@@ -13,7 +13,7 @@ import { OrderProvider } from '../providers/order.provider';
 import { StoreProvider } from '../providers/store.provider';
 import { UserProvider } from '../providers/user.provider';
 import { ServerAddr } from '../services/server.addr';
-import { FCM } from '@ionic-native/fcm';
+
 import { StoreListPageModule } from '../pages/store-list/store-list.module';
 import { StoreDetailPageModule } from '../pages/store-detail/store-detail.module';
 import { OrderLogPageModule } from '../pages/order-log/order-log.module';
@@ -51,7 +51,6 @@ import { OrderPageModule } from '../pages/order/order.module';
     StoreProvider,
     UserProvider,
     ServerAddr,
-    FCM
   ]
 })
 export class AppModule {}
