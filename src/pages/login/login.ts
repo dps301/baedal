@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { TabPage } from '../tab/tab';
 import { Facebook } from "@ionic-native/facebook";
+import { UserProvider } from '../../providers/user.provider';
+import { LoginSessionService } from '../../services/login.session';
 
 @Component({
   selector: 'page-login',
@@ -9,12 +11,13 @@ import { Facebook } from "@ionic-native/facebook";
   providers: [ Facebook ]
 })
 export class LoginPage {
+  sns: string = '';
+  snsKey: string = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private fb: Facebook) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private fb: Facebook, private userProvider: UserProvider, private loginSession: LoginSessionService) {
   }
 
   ionViewDidLoad() {
-    // this.navCtrl.setRoot(TabPage)
   }
 
   presentPrompt() {
@@ -42,7 +45,7 @@ export class LoginPage {
         {
           text: 'Ok',
           handler: data => {
-            console.log(data.phone);
+            this.register(data.name, data.phone);
           }
         }
       ]
@@ -54,12 +57,38 @@ export class LoginPage {
     this.fb.login(['email', 'public_profile'])
     .then(
       (result) => {
-        // this.checkIsUser(result.authResponse.userID);
-        console.log(JSON.stringify(result));
+        this.sns = 'fb';
+        this.snsKey = result.authResponse.userID;
+        this.checkIsUser();
       }, 
       (message) => {
-        console.log('Error logging in');
-        // this.util.showAlert('Error', JSON.stringify(message));
+        this.presentPrompt();
+      }
+    );
+  }
+
+  checkIsUser() {
+    this.userProvider.login(this.sns, this.snsKey)
+    .subscribe(
+      data => {
+        this.loginSession.set(data.json()[0].userNo, data.json()[0].name, data.json()[0].phone);
+        this.navCtrl.setRoot(TabPage);
+      },
+      error => {
+        this.presentPrompt();
+      }
+    );
+  }
+
+  register(name, phone) {
+    this.userProvider.join(this.sns, this.snsKey, name, phone)
+    .subscribe(
+      data => {
+        this.loginSession.set(data.json()[0].userNo, name, phone);
+        this.navCtrl.setRoot(TabPage);
+      },
+      error => {
+
       }
     );
   }

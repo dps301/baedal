@@ -20,6 +20,7 @@ import { OrderLogPageModule } from '../pages/order-log/order-log.module';
 import { LoginPageModule } from '../pages/login/login.module';
 import { TabPageModule } from '../pages/tab/tab.module';
 import { OrderPageModule } from '../pages/order/order.module';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { OrderPageModule } from '../pages/order/order.module';
     StoreProvider,
     UserProvider,
     ServerAddr,
+    NativeStorage
   ]
 })
 export class AppModule {}
